@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioExplora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>BioExplora</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#rankings">Rankings</a></li>
+        <li><a href="#busca">Buscar Vídeos</a></li>
+        <li><a href="https://www.youtube.com/@ProfeJuoficial" target="_blank">Canal no YouTube</a></li>
+      </ul>
+      <button id="toggle-theme">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home">
+      <h2>Bem-vindo ao BioExplora!</h2>
+      <p>O seu guia definitivo para explorar o mundo da Biologia com vídeos didáticos e interativos, conectados diretamente ao canal Profe Ju.</p>
+      <p><a href="https://www.youtube.com/@ProfeJuoficial" target="_blank">Clique aqui para visitar nosso canal no YouTube 🎥</a></p>
+    </section>
+
+    <section id="rankings">
+      <h2>Rankings do Mês</h2>
+      <div class="ranking-container">
+        <div class="ranking">
+          <h3>Mais Pesquisados</h3>
+          <ul id="mais-pesquisados">
+            <li><a href="https://www.youtube.com/results?search_query=DNA+e+RNA+Profe+Ju" target="_blank">DNA e RNA</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Fotossíntese+Profe+Ju" target="_blank">Fotossíntese</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Sistema+Nervoso+Profe+Ju" target="_blank">Sistema Nervoso</a></li>
+          </ul>
+        </div>
+        <div class="ranking">
+          <h3>Mais Vistos</h3>
+          <ul id="mais-vistos">
+            <li><a href="https://www.youtube.com/results?search_query=Genética+Mendeliana+Profe+Ju" target="_blank">Genética Mendeliana</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Ecossistemas+Profe+Ju" target="_blank">Ecossistemas</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Mitose+e+Meiose+Profe+Ju" target="_blank">Mitose e Meiose</a></li>
+          </ul>
+        </div>
+        <div class="ranking">
+          <h3>Mais Completos</h3>
+          <ul id="mais-completos">
+            <li><a href="https://www.youtube.com/results?search_query=Origem+da+Vida+Profe+Ju" target="_blank">Origem da Vida</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Imunologia+Profe+Ju" target="_blank">Imunologia</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=Reino+Animal+Profe+Ju" target="_blank">Reino Animal</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="busca">
+      <h2>Buscar Vídeos</h2>
+      <input type="text" id="searchInput" placeholder="Digite um tema ou palavra-chave...">
+      <button onclick="buscarVideos()">Buscar</button>
+      <ul id="resultados"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BioExplora. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const resultados = document.getElementById('resultados');
+    const searchInput = document.getElementById('searchInput');
+    const temas = [
+      'Fotossíntese', 'Mitose', 'Meiose', 'DNA', 'RNA', 'Genética', 'Ecologia', 'Sustentabilidade'
+    ];
+
+    function buscarVideos() {
+      const termo = searchInput.value.toLowerCase();
+      resultados.innerHTML = '';
+      const filtrados = temas.filter(t => t.toLowerCase().includes(termo));
+
+      if (filtrados.length === 0) {
+        resultados.innerHTML = '<li>Nenhum vídeo encontrado.</li>';
+        return;
+      }
+
+      filtrados.forEach(t => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(t + ' Profe Ju')}`;
+        link.target = '_blank';
+        link.textContent = t;
+        li.appendChild(link);
+        resultados.appendChild(li);
+      });
+    }
+
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
